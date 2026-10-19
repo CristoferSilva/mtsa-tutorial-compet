@@ -1,0 +1,40 @@
+After installing Docker, make sure the Docker Desktop application is open and running.
+
+1. Build the Docker image
+
+Open a terminal in the directory containing the Dockerfile and run:
+
+docker build --no-cache --platform linux/arm64 -t mtsa .
+
+This command builds the Docker image and names it mtsa.
+
+2. Start a Docker container
+
+Run the following command:
+
+docker run --platform linux/arm64 -it \
+  --name mtsa-container \
+  -p 8888:8888 \
+  -v "$(pwd)":/workspace \
+  -w /workspace \
+  mtsa
+
+This will start a container with:
+
+Port 8888 exposed to your local machine.
+Your current directory mounted as /workspace.
+The working directory set to /workspace.
+
+3. Attach to the container from VS Code
+Open Visual Studio Code.
+Make sure you have the Dev Containers extension installed.
+Open the Command Palette (Ctrl+Shift+P or Cmd+Shift+P).
+Select Dev Containers: Attach to Running Container....
+Choose the mtsa-trcvae container from the list.
+
+4. Clone the repository and start working
+Once connected to the container:
+
+Navigate to the /workspace directory.
+Clone the project repository (if you haven't already).
+Open the project folder in VS Code and start working :)
