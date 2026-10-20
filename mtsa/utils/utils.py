@@ -3,8 +3,6 @@ import librosa as lib
 from functools import reduce
 import torch.nn as nn
 from sklearn.preprocessing import StandardScaler
-from mtsa.features.mel import Array2Mfcc
-from mtsa.features.stats import FEATURES
 from sklearn.pipeline import FeatureUnion
 #import torch
 #from torch.nn.init import xavier_uniform_
@@ -176,22 +174,22 @@ class mfcc2Tensor(BaseEstimator, TransformerMixin):
         return X
 
 
-def build_signal_processing_steps(use_array2mfcc=False, sampling_rate=16000, mono=False, use_featureUnion=False, use_mfcc2tensor = False,wav2array=False, standard_normalization=True):
-    steps = []
+# def build_signal_processing_steps(use_array2mfcc=False, sampling_rate=16000, mono=False, use_featureUnion=False, use_mfcc2tensor = False,wav2array=False, standard_normalization=True):
+#     steps = []
     
-    if wav2array:
-        wav2array = Wav2Array(sampling_rate=sampling_rate, mono=mono)
-        steps.append(("wav2array", wav2array))
+#     if wav2array:
+#         wav2array = Wav2Array(sampling_rate=sampling_rate, mono=mono)
+#         steps.append(("wav2array", wav2array))
 
-    if use_array2mfcc:
-        array2mfcc = Array2Mfcc(sampling_rate=sampling_rate)
-        steps.append(("array2mfcc", array2mfcc))
+#     if use_array2mfcc:
+#         array2mfcc = Array2Mfcc(sampling_rate=sampling_rate)
+#         steps.append(("array2mfcc", array2mfcc))
 
-    if use_featureUnion:
-        features = FeatureUnion(FEATURES)
-        steps.append(("features", features))
+#     if use_featureUnion:
+#         features = FeatureUnion(FEATURES)
+#         steps.append(("features", features))
         
-    if use_mfcc2tensor:
-        steps.append(("mfcc2Tensor", mfcc2Tensor()))
+#     if use_mfcc2tensor:
+#         steps.append(("mfcc2Tensor", mfcc2Tensor()))
         
-    return steps
+#     return steps
